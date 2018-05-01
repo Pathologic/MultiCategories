@@ -15,7 +15,7 @@ class Controller
 
     public $dlParams = array(
         "api"         => 1,
-        "addWhereList" => 'c.isfolder = 1',
+        "addWhereList" => 'c.isfolder = 1 AND c.deleted = 0',
         "parents"     => 0,
         "hideSubMenus" => 1,
         "selectFields" => 'id,isfolder,parent,pagetitle,menutitle'
@@ -29,8 +29,9 @@ class Controller
     {
         $this->modx = $modx;
         $this->data = new Model($modx);
-
-
+        if (!empty($modx->event->params['parents'])) {
+            $this->dlParams['parents'] = $modx->event->params['parents'];
+        }
     }
 
     /**
@@ -43,7 +44,9 @@ class Controller
         if (!$id && $openIds) {
             $this->dlParams['openIds'] = implode(',', $openIds);
         }
-        $this->dlParams['parents'] = $id;
+        if ($id) {
+            $this->dlParams['parents'] = $id;
+        }
         $this->dlParams['prepare'] = function(array $data = array()) use ($openIds) {
             $data['text'] = $data['title'];
             $data['state'] = $data['isfolder'] == 1 && !isset($data['children']) ? 'closed' : 'open';

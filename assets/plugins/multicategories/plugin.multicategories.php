@@ -11,14 +11,12 @@ if ($e->name == 'OnDocFormRender') {
 if ($e->name == 'OnDocFormSave') {
     include_once(MODX_BASE_PATH . 'assets/plugins/multicategories/lib/model.php');
     $data = new \MultiCategories\Model($modx);
-    $categories = array();
-    if (!empty($_POST['__multicategories']) && is_scalar($_POST['__multicategories'])) {
-        $categories = explode(',', $_POST['__multicategories']);
-    }
+    $categories = !empty($_POST['__multicategories']) && is_scalar($_POST['__multicategories']) ? explode(',', $_POST['__multicategories']) : array();
     $data->save($id, $categories);
 }
 if ($e->name == 'OnEmptyTrash') {
     if (empty($ids)) return;
-    $where = implode(',', $ids);
-    $modx->db->delete($modx->getFullTableName('site_content_categories'), "`doc` IN ({$where}) OR `category` IN ({$where})");
+    include_once (MODX_BASE_PATH . 'assets/plugins/multicategories/lib/model.php');
+    $data = new \MultiCategories\Model($modx);
+    $data->remove($ids);
 }

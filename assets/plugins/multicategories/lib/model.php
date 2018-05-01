@@ -73,11 +73,18 @@ class Model {
     }
 
     /**
-     * @param $ids
+     * @param array $ids
      * @return bool
      */
-    public function remove($ids) {
+    public function remove($ids = array()) {
         $result = false;
+        $ids = $this->cleanIDs($ids);
+        if ($ids) {
+            $where = implode(',', $ids);
+            $this->modx->db->delete($modx->getFullTableName('site_content_categories'),
+                "`doc` IN ({$where}) OR `category` IN ({$where})");
+            $result = true;
+        }
 
         return $result;
     }
@@ -95,6 +102,12 @@ OUT;
         $this->modx->db->query($sql);
     }
 
+    /**
+     * @param $IDs
+     * @param string $sep
+     * @param array $ignore
+     * @return array
+     */
     public function cleanIDs($IDs, $sep = ',', $ignore = array())
     {
         $out = array();
