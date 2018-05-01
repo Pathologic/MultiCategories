@@ -81,7 +81,7 @@ class Model {
         $ids = $this->cleanIDs($ids);
         if ($ids) {
             $where = implode(',', $ids);
-            $this->modx->db->delete($modx->getFullTableName('site_content_categories'),
+            $this->modx->db->delete($this->table,
                 "`doc` IN ({$where}) OR `category` IN ({$where})");
             $result = true;
         }
