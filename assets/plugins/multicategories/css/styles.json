@@ -1,0 +1,12 @@
+{
+  "styles": {
+    "EasyUIMODX" : {
+      "version":"1.5.2",
+      "src":"assets/js/easy-ui/themes/modx/easyui.css"
+    },
+    "MultiCategoriesCss" : {
+      "version":"1.0.0",
+      "src":"assets/plugins/multicategories/css/multicategories.css"
+    }
+  }
+}
