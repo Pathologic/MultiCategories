@@ -17,6 +17,7 @@ class Controller
         "api"         => 1,
         "addWhereList" => 'c.isfolder = 1 AND c.deleted = 0',
         "parents"     => 0,
+        "showParent"  => 1,
         "hideSubMenus" => 1,
         "selectFields" => 'id,isfolder,parent,pagetitle,menutitle'
     );
@@ -46,6 +47,7 @@ class Controller
         }
         if ($id) {
             $this->dlParams['parents'] = $id;
+            $this->dlParams['showParent'] = 0;
         }
         $this->dlParams['prepare'] = function(array $data = array()) use ($openIds) {
             $data['text'] = $data['title'];
