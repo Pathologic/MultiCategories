@@ -19,6 +19,7 @@ class Controller
         "parents"     => 0,
         "showParent"  => 1,
         "hideSubMenus" => 1,
+        "titleField" => 'text',
         "selectFields" => 'id,isfolder,parent,pagetitle,menutitle'
     );
 
@@ -50,7 +51,6 @@ class Controller
             $this->dlParams['showParent'] = 0;
         }
         $this->dlParams['prepare'] = function(array $data = array()) use ($openIds) {
-            $data['text'] = $data['title'];
             $data['state'] = $data['isfolder'] == 1 && !isset($data['children']) ? 'closed' : 'open';
             if (in_array($data['id'], $openIds)) $data['checked'] = true;
 
