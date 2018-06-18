@@ -53,7 +53,8 @@ class Controller
         $this->dlParams['prepare'] = function(array $data = array()) use ($openIds) {
             $data['state'] = $data['isfolder'] == 1 && !isset($data['children']) ? 'closed' : 'open';
             if (in_array($data['id'], $openIds)) $data['checked'] = true;
-
+            $data['text'] = \APIHelpers::e($data['text']);
+            
             return $data;
         };
         $out = json_decode($this->modx->runSnippet('DLMenu', $this->dlParams), true);
