@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_MANAGER_MODE') || IN_MANAGER_MODE != 'true') die();
+if (!defined('IN_MANAGER_MODE') || IN_MANAGER_MODE != 'true') return;
 $e = &$modx->event;
 if ($e->name == 'OnDocFormRender') {
     include_once(MODX_BASE_PATH . 'assets/plugins/multicategories/lib/plugin.class.php');
