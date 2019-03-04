@@ -8,6 +8,7 @@ use \SimpleTab\Plugin as SimplePlugin;
  */
 class Plugin extends SimplePlugin
 {
+    public $table = 'site_content_categories';
     public $pluginName = 'MultiCategories';
     public $tpl = 'assets/plugins/multicategories/tpl/multicategories.tpl';
     public $jsListDefault = 'assets/plugins/multicategories/js/scripts.json';
