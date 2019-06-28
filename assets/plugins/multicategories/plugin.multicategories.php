@@ -6,7 +6,7 @@ if ($e->name == 'OnDocFormRender') {
     global $modx_lang_attribute;
     $plugin = new \MultiCategories\Plugin($modx, $modx_lang_attribute);
     $output = $plugin->render();
-    if ($output) $e->output($output);
+    if ($output) $modx->event->addOutput($output);
 }
 if ($e->name == 'OnDocFormSave' && isset($_POST['__multicategories'])) {
     include_once(MODX_BASE_PATH . 'assets/plugins/multicategories/lib/model.php');
