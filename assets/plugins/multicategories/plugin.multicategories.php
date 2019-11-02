@@ -3,8 +3,7 @@ if (!defined('IN_MANAGER_MODE') || IN_MANAGER_MODE != 'true') die();
 $e = &$modx->event;
 if ($e->name == 'OnDocFormRender') {
     include_once(MODX_BASE_PATH . 'assets/plugins/multicategories/lib/plugin.class.php');
-    global $modx_lang_attribute;
-    $plugin = new \MultiCategories\Plugin($modx, $modx_lang_attribute);
+    $plugin = new \MultiCategories\Plugin($modx, $modx->getConfig('lang_code'));
     $output = $plugin->render();
     if ($output) $e->output($output);
 }
