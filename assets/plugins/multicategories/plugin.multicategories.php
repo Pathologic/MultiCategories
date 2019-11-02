@@ -7,7 +7,7 @@ if ($e->name == 'OnDocFormRender') {
     $output = $plugin->render();
     if ($output) $modx->event->addOutput($output);
 }
-if ($e->name == 'OnDocFormSave' && isset($_POST['__multicategories'])) {
+if ($e->name == 'OnDocFormSave' && $modx->isBackend() && isset($_POST['__multicategories'])) {
     include_once(MODX_BASE_PATH . 'assets/plugins/multicategories/lib/model.php');
     $data = new \MultiCategories\Model($modx);
     $categories = !empty($_POST['__multicategories']) && is_scalar($_POST['__multicategories']) ? explode(',', $_POST['__multicategories']) : array();
