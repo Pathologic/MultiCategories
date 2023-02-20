@@ -24,10 +24,10 @@ class Plugin extends SimplePlugin
         include_once(MODX_BASE_PATH . 'assets/plugins/multicategories/lib/model.php');
         $data = new Model($this->modx);
         $ph = array(
-            'lang'         => $this->lang_attribute,
+            'lang'         => $this->modx->getConfig('lang_code'),
             'categories'   => implode(',', $data->getCategories($this->params['id'])),
-            'url'          => $this->modx->config['site_url'] . 'assets/plugins/multicategories/ajax.php',
-            'site_url'     => $this->modx->config['site_url'],
+            'url'          => MODX_SITE_URL . 'assets/plugins/multicategories/ajax.php',
+            'site_url'     => MODX_SITE_URL,
             'manager_url'  => MODX_MANAGER_URL,
         );
 
