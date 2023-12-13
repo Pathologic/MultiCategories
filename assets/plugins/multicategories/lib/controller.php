@@ -14,13 +14,13 @@ class Controller
     public $isExit = false;
 
     public $dlParams = array(
-        "api"         => 1,
-        "addWhereList" => 'c.isfolder = 1 AND c.deleted = 0',
-        "parents"     => 0,
-        "showParent"  => 1,
-        "hideSubMenus" => 1,
-        "titleField" => 'text',
-        "selectFields" => 'id,isfolder,parent,pagetitle,menutitle'
+        'addWhereList'   => 'c.isfolder = 1 AND c.deleted = 0',
+        'parents'        => 0,
+        'showParent'     => 1,
+        'hideSubMenus'   => 1,
+        'titleField'     => 'text',
+        'selectFields'   => 'id,isfolder,parent,pagetitle,menutitle',
+        'returnDLObject' => 1
     );
 
     /**
@@ -57,9 +57,13 @@ class Controller
             
             return $data;
         };
-        $out = json_decode($this->modx->runSnippet('DLMenu', $this->dlParams), true);
+        $dl = $this->modx->runSnippet('DLMenu', $this->dlParams);
+        $out = [];
+        foreach($dl->getMenu() as $menu) {
+            $out = array_merge($out, $menu);
+        }
 
-        return $out[0];
+        return $out;
     }
 
     /**
